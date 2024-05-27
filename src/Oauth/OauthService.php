@@ -31,11 +31,11 @@ class OauthService
         $this->signature = new HmacSha256Signature($consumerCredentials);
     }
 
-    public function getAuthorizationHeader(string $method, string $path, array $bodyParameters = []): string
+    public function getAuthorizationHeader(string $method, string $uri, array $bodyParameters = []): string
     {
         $header = $this->protocolHeader(
             strtoupper($method),
-            sprintf('%s%s', $this->companyUrl, $path),
+            $uri,
             $this->tokenCredentials,
             $bodyParameters
         );

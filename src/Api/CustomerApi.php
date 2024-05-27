@@ -17,11 +17,12 @@ class CustomerApi
     /**
      * @throws ApiException
      */
-    public function list(): array
+    public function list(array $queryParams = []): array
     {
         $response = $this->httpClient->sendRequest(
             'GET',
-            static::CUSTOMERS_URI
+            static::CUSTOMERS_URI,
+            queryParams: $queryParams
         );
 
         return json_decode($response->getBody()->getContents(), true);
@@ -45,10 +46,21 @@ class CustomerApi
      */
     public function insert(array $record): void
     {
-        $response = $this->httpClient->sendRequest(
+        $this->httpClient->sendRequest(
             'POST',
             static::CUSTOMERS_URI,
             body: $record
+        );
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function delete(string $customerId): void
+    {
+        $this->httpClient->sendRequest(
+            'DELETE',
+            sprintf(static::CUSTOMER_URI, $customerId)
         );
     }
 }

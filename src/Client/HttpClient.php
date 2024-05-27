@@ -6,6 +6,7 @@ use Http\Discovery\Psr18Client;
 use NetsuiteRestApi\Oauth\OauthService;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Psr7\Utils;
 
 class HttpClient
@@ -21,13 +22,22 @@ class HttpClient
     /**
      * @throws ApiException
      */
-    public function sendRequest(string $httpMethod, string $uri, array $headers = [], array $body = []): ResponseInterface
-    {
-        $headers['Authorization'] = $this->oauthService->getAuthorizationHeader($httpMethod, $uri);
-        $headers['Content-Type'] = 'application/json';
+    public function sendRequest(
+        string $httpMethod,
+        string $path,
+        array $headers = [],
+        array $queryParams = [],
+        array $body = []
+    ): ResponseInterface {
+        $uri = new Uri(sprintf('%s%s', $this->baeUrl, $path));
+        if (!empty($queryParams)) {
+            $uri = Uri::withQueryValues($uri, $queryParams);
+        }
 
-        $url = sprintf('%s%s', $this->baeUrl, $uri);
-        $request = $this->requestFactory->createRequest($httpMethod, $url);
+        $request = $this->requestFactory->createRequest($httpMethod, $uri->jsonSerialize());
+
+        $headers['Authorization'] = $this->oauthService->getAuthorizationHeader($httpMethod, $uri->jsonSerialize());
+        $headers['Content-Type'] = 'application/json';
 
         foreach ($headers as $name => $value) {
             $request = $request->withHeader($name, $value);

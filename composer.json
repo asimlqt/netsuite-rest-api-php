@@ -1,0 +1,32 @@
+{
+    "name": "asimlqt/netsuite-rest-api-php",
+    "type": "library",
+    "license": "MIT License",
+    "autoload": {
+        "psr-4": {
+            "NetsuiteRestApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Asim Liaquat",
+            "email": "asimlqt22@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "php-http/discovery": "^1.17",
+        "psr/http-client-implementation": "*",
+        "psr/http-factory-implementation": "*",
+        "guzzlehttp/psr7": "^2.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    },
+    "require-dev": {
+        "symfony/http-client": "^6.4",
+        "nyholm/psr7": "^1.8"
+    }
+}

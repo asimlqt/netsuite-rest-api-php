@@ -15,7 +15,6 @@ class HttpClient
         private readonly string $baeUrl,
         private readonly Psr18Client $client,
         private readonly RequestFactoryInterface $requestFactory,
-        private readonly UriGenerator $uriGenerator,
         private readonly OauthService $oauthService
     ) {}
 

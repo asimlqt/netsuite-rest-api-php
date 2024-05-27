@@ -7,7 +7,6 @@ use Http\Discovery\Psr18Client;
 use NetsuiteRestApi\Api\CustomerApi;
 use NetsuiteRestApi\Api\QueryApi;
 use NetsuiteRestApi\Client\HttpClient;
-use NetsuiteRestApi\Client\UriGenerator;
 use NetsuiteRestApi\Oauth\OauthService;
 
 class NetsuiteClientFactory
@@ -39,7 +38,6 @@ class NetsuiteClientFactory
             $this->companyUrl,
             $client,
             $requestFactory,
-            new UriGenerator($this->companyUrl),
             $oauthService
         );
 

@@ -6,6 +6,7 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18Client;
 use NetsuiteRestApi\Api\CustomerApi;
 use NetsuiteRestApi\Api\QueryApi;
+use NetsuiteRestApi\Api\SalesOrderApi;
 use NetsuiteRestApi\Client\HttpClient;
 use NetsuiteRestApi\Oauth\OauthService;
 
@@ -43,7 +44,8 @@ class NetsuiteClientFactory
 
         return new NetsuiteClient(
             new CustomerApi($httpClient),
-            new QueryApi($httpClient)
+            new QueryApi($httpClient),
+            new SalesOrderApi($httpClient)
         );
     }
 }

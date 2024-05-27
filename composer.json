@@ -1,7 +1,8 @@
 {
     "name": "asimlqt/netsuite-rest-api-php",
+    "description": "A REST API client for Netsuite",
     "type": "library",
-    "license": "MIT License",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "NetsuiteRestApi\\": "src/"

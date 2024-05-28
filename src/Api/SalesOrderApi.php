@@ -31,11 +31,12 @@ class SalesOrderApi
     /**
      * @throws ApiException
      */
-    public function get(string $id): array
+    public function get(string $id, array $queryParams = []): array
     {
         $response = $this->httpClient->sendRequest(
             'GET',
-            sprintf(static::SALES_ORDER_URI, $id)
+            sprintf(static::SALES_ORDER_URI, $id),
+            queryParams: $queryParams
         );
 
         return json_decode($response->getBody()->getContents(), true);

@@ -31,11 +31,12 @@ class CustomerApi
     /**
      * @throws ApiException
      */
-    public function get(string $customerId): array
+    public function get(string $customerId, array $queryParams = []): array
     {
         $response = $this->httpClient->sendRequest(
             'GET',
-            sprintf(static::CUSTOMER_URI, $customerId)
+            sprintf(static::CUSTOMER_URI, $customerId),
+            queryParams: $queryParams
         );
 
         return json_decode($response->getBody()->getContents(), true);

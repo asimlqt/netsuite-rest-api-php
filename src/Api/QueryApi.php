@@ -16,12 +16,13 @@ class QueryApi
     /**
      * @throws ApiException
      */
-    public function query(string $query): array
+    public function query(string $query, array $queryParams = []): array
     {
         $response = $this->httpClient->sendRequest(
             'POST',
             static::QUERY_URI,
             ['prefer' => 'transient'],
+            $queryParams,
             ['q' => $query]
         );
 

@@ -4,11 +4,13 @@ namespace NetsuiteRestApi;
 
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18Client;
+use NetsuiteRestApi\Api\CreditMemoApi;
 use NetsuiteRestApi\Api\CustomerApi;
 use NetsuiteRestApi\Api\QueryApi;
 use NetsuiteRestApi\Api\SalesOrderApi;
 use NetsuiteRestApi\Client\HttpClient;
 use NetsuiteRestApi\Oauth\OauthService;
+use NetsuiteRestApi\Pagination\PageFactory;
 
 class NetsuiteClientFactory
 {
@@ -42,10 +44,13 @@ class NetsuiteClientFactory
             $oauthService
         );
 
+        $pageFactory = new PageFactory($httpClient);
+
         return new NetsuiteClient(
-            new CustomerApi($httpClient),
-            new QueryApi($httpClient),
-            new SalesOrderApi($httpClient)
+            new CreditMemoApi($httpClient, $pageFactory),
+            new CustomerApi($httpClient, $pageFactory),
+            new QueryApi($httpClient, $pageFactory),
+            new SalesOrderApi($httpClient, $pageFactory)
         );
     }
 }

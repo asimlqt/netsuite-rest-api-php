@@ -4,6 +4,8 @@ namespace NetsuiteRestApi\Api;
 
 use NetsuiteRestApi\Client\ApiException;
 use NetsuiteRestApi\Client\HttpClient;
+use NetsuiteRestApi\Pagination\Cursor;
+use NetsuiteRestApi\Pagination\PageFactory;
 
 class CustomerApi
 {
@@ -11,13 +13,14 @@ class CustomerApi
     const CUSTOMER_URI = "/services/rest/record/v1/customer/%s";
 
     public function __construct(
-        private readonly HttpClient $httpClient
+        private readonly HttpClient $httpClient,
+        private readonly PageFactory $pageFactory
     ) {}
 
     /**
      * @throws ApiException
      */
-    public function list(array $queryParams = []): array
+    public function list(array $queryParams = []): Cursor
     {
         $response = $this->httpClient->sendRequest(
             'GET',
@@ -25,7 +28,9 @@ class CustomerApi
             queryParams: $queryParams
         );
 
-        return json_decode($response->getBody()->getContents(), true);
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return new Cursor($this->pageFactory->createPage($data));
     }
 
     /**

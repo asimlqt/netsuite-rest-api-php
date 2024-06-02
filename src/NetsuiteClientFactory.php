@@ -9,6 +9,7 @@ use NetsuiteRestApi\Api\QueryApi;
 use NetsuiteRestApi\Api\SalesOrderApi;
 use NetsuiteRestApi\Client\HttpClient;
 use NetsuiteRestApi\Oauth\OauthService;
+use NetsuiteRestApi\Pagination\PageFactory;
 
 class NetsuiteClientFactory
 {
@@ -42,9 +43,11 @@ class NetsuiteClientFactory
             $oauthService
         );
 
+        $pageFactory = new PageFactory($httpClient);
+
         return new NetsuiteClient(
-            new CustomerApi($httpClient),
-            new QueryApi($httpClient),
+            new CustomerApi($httpClient, $pageFactory),
+            new QueryApi($httpClient, $pageFactory),
             new SalesOrderApi($httpClient)
         );
     }

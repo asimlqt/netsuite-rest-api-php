@@ -20,11 +20,12 @@ class Base
     /**
      * @throws ApiException
      */
-    public function list(array $queryParams = []): Cursor
+    public function list(array $headers = [], array $queryParams = []): Cursor
     {
         $response = $this->httpClient->sendRequest(
             'GET',
             $this->createPath(),
+            headers: $headers,
             queryParams: $queryParams
         );
 
@@ -36,11 +37,12 @@ class Base
     /**
      * @throws ApiException
      */
-    public function get(string $id, array $queryParams = []): array
+    public function get(string $id, array $headers = [], array $queryParams = []): array
     {
         $response = $this->httpClient->sendRequest(
             'GET',
             sprintf($this->createPath(true), $id),
+            headers: $headers,
             queryParams: $queryParams
         );
 
@@ -50,11 +52,13 @@ class Base
     /**
      * @throws ApiException
      */
-    public function insert(array $record): ResponseInterface
+    public function insert(array $record, array $headers = [], array $queryParams = []): ResponseInterface
     {
         return $this->httpClient->sendRequest(
             'POST',
             $this->createPath(),
+            headers: $headers,
+            queryParams: $queryParams,
             body: $record
         );
     }
@@ -62,11 +66,40 @@ class Base
     /**
      * @throws ApiException
      */
-    public function delete(string $id): ResponseInterface
+    public function delete(string $id, array $headers = []): ResponseInterface
     {
         return $this->httpClient->sendRequest(
             'DELETE',
-            sprintf($this->createPath(true), $id)
+            sprintf($this->createPath(true), $id),
+            headers: $headers
+        );
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function update(string $id, array $record, array $headers = [], array $queryParams = []): ResponseInterface
+    {
+        return $this->httpClient->sendRequest(
+            'PATCH',
+            sprintf($this->createPath(true), $id),
+            headers: $headers,
+            queryParams: $queryParams,
+            body: $record
+        );
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function upsert(string $id, array $record, array $headers = [], array $queryParams = []): ResponseInterface
+    {
+        return $this->httpClient->sendRequest(
+            'PUT',
+            sprintf($this->createPath(true), $id),
+            headers: $headers,
+            queryParams: $queryParams,
+            body: $record
         );
     }
 

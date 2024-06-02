@@ -2,7 +2,7 @@
 
 namespace NetsuiteRestApi\Api;
 
-class CreditMemoApi extends Base
+class CreditMemo extends Base
 {
     const PATH = "/creditMemo";
 }

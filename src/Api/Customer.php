@@ -2,7 +2,7 @@
 
 namespace NetsuiteRestApi\Api;
 
-class CustomerApi extends Base
+class Customer extends Base
 {
     const PATH = "/customer";
 }

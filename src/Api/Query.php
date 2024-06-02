@@ -7,7 +7,7 @@ use NetsuiteRestApi\Client\HttpClient;
 use NetsuiteRestApi\Pagination\Cursor;
 use NetsuiteRestApi\Pagination\PageFactory;
 
-class QueryApi
+class Query
 {
     const QUERY_URI = "/services/rest/query/v1/suiteql";
 

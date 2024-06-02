@@ -2,7 +2,7 @@
 
 namespace NetsuiteRestApi\Api;
 
-class SalesOrderApi extends Base
+class SalesOrder extends Base
 {
     const PATH = "/salesOrder";
 }

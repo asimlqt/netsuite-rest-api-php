@@ -55,7 +55,7 @@ trait EncodesUrl
         return $normalizedArray;
     }
 
-    protected function queryStringFromData(array $data, array $queryParams = null, string $prevKey = ''): string
+    protected function queryStringFromData(array $data, ?array $queryParams = null, string $prevKey = ''): string
     {
         if ($initial = (null === $queryParams)) {
             $queryParams = [];

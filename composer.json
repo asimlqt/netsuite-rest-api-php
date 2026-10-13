@@ -22,7 +22,7 @@
         "php-http/discovery": "^1.17",
         "psr/http-client-implementation": "*",
         "psr/http-factory-implementation": "*",
-        "guzzlehttp/psr7": "^2.6"
+        "guzzlehttp/psr7": "^2.6|^3.0"
     },
     "config": {
         "allow-plugins": {

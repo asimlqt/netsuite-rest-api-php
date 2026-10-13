@@ -30,6 +30,8 @@ class HttpClient
     ): ResponseInterface {
         $uri = new Uri(sprintf('%s%s', $this->baeUrl, $path));
         if (!empty($queryParams)) {
+            // guzzlehttp/psr7 3 only accepts string or null query values
+            $queryParams = array_map(fn ($value) => is_scalar($value) ? (string) $value : $value, $queryParams);
             $uri = Uri::withQueryValues($uri, $queryParams);
         }
 
